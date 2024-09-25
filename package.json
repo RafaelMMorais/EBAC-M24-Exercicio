@@ -1,0 +1,19 @@
+{
+  "name": "Exercicio Mod 24",
+  "version": "1.0.0",
+  "description": "Testes em GraphQL com Pactum",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/**/*.test.js"
+  },
+  "keywords": [],
+  "author": "Rafael Morais",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.7.3",
+    "pactum": "^3.7.1"
+  },
+  "dependencies": {
+    "pactum-matchers": "^1.1.7"
+  }
+}
