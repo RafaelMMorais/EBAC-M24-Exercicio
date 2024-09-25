@@ -15,9 +15,8 @@ beforeEach(async () => {
         .returns('data.token')
 })
 
-let catId;
 it('API - Deve Listar as Categorias', async () => {
-    catId = await spec()
+    await spec()
         .get('/public/getCategories')
         .expectStatus(200)
         .expectJsonMatch({
@@ -30,11 +29,11 @@ it('API - Deve Listar as Categorias', async () => {
                 "__v": 0
             })
         })
-        .returns('data.catId')
 });
-/*
+
+let catId;
 it('API - Deve Adicionar categorias', async () => {
-    await spec()
+    catId = await spec()
         .post('/api/addCategory')
         .withJson({
             "authorization": token,
@@ -42,11 +41,12 @@ it('API - Deve Adicionar categorias', async () => {
             //Imagem usada em aula mesmo
             "photo": "https://www.zipmaster.com/wp-content/uploads/2022/04/Reusable-Cloth-Shopping-Bags-Rainbow-Pack-200-Case-Reusable-Bags-B26-061-3-1000x1000.jpg.webp"
         })
+        .returns('data.catId')
 });
-*/
+
 it('API - Deve editar categorias', async () => {
     await spec()
-        .put(`/api/editCategory/66f47146b0a1cbf3a0ff4d41`)
+        .put(`/api/editCategory/${catId}`)
         .withJson({
             "authorization": token,
             "name": "Guitarra 2",
@@ -57,7 +57,7 @@ it('API - Deve editar categorias', async () => {
 
 it('API - Deve deletar categorias', async () => {
     await spec()
-        .delete(`/api/deleteCategory/66f46dda9a71c994ace424db`)
+        .delete(`/api/deleteCategory/${catId}`)
         .withJson({
             "authorization": token,
         })
