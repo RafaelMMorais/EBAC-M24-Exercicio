@@ -15,7 +15,7 @@ beforeEach(async () => {
         .returns('data.token')
 })
 
-it('API - Deve Listar as Categorias', async () => {
+it('API - Deve listar as categorias', async () => {
     await spec()
         .get('/public/getCategories')
         .expectStatus(200)
@@ -32,7 +32,7 @@ it('API - Deve Listar as Categorias', async () => {
 });
 
 let catId;
-it('API - Deve Adicionar categorias e pegar o ID', async () => {
+it('API - Deve Adicionar uma categorias e pegar o ID', async () => {
     catId = await spec()
         .post('/api/addCategory')
         .withHeaders("Authorization", token)
@@ -45,18 +45,17 @@ it('API - Deve Adicionar categorias e pegar o ID', async () => {
         console.log("ID da Nova Categoria: ", catId)
 });
 
-it('API - Deve editar categorias', async () => {
+it('API - Deve editar a categoria', async () => {
     await spec()
         .put(`/api/editCategory/${catId}`)
         .withJson({
             "authorization": token,
             "name": "Guitarra 2",
-            //Imagem usada em aula mesmo
             "photo": "Any"
         })
 });
 
-it('API - Deve deletar categorias', async () => {
+it('API - Deve deletar a categoria', async () => {
     await spec()
         .delete(`/api/deleteCategory/${catId}`)
         .withJson({

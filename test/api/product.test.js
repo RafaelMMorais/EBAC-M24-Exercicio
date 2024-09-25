@@ -15,50 +15,56 @@ beforeEach(async () => {
         .returns('data.token')
 })
 
-it('API - Deve Listar as Categorias', async () => {
+it('API - Deve Listar os produtos', async () => {
     await spec()
-        .get('/public/getCategories')
+        .get('/public/getProducts')
         .expectStatus(200)
-        .expectJsonMatch({
-            categories: eachLike({
-                "_id": like("657b05fe31b986f1c0a7a053"),
-                "name": like("Guitarra"),
-                "photo": like("https://www.zipmaster.com/wp-content/uploads/2022/04/Reusable-Cloth-Shopping-Bags-Rainbow-Pack-200-Case-Reusable-Bags-B26-061-3-1000x1000.jpg.webp"),
-                "createdAt": like("2024-09-25T19:43:44.809Z"),
-                "updatedAt": like("2024-09-25T19:43:44.809Z"),
-                "__v": 0
-            })
-        })
 });
 
 let catId;
-it('API - Deve Adicionar categorias e pegar o ID', async () => {
+it('API - Deve Adicionar um produto e pegar o ID', async () => {
     catId = await spec()
-        .post('/api/addCategory')
+        .post('/api/addProduct')
         .withHeaders("Authorization", token)
         .withJson({
-            "name": "Guitarra",
-            //Imagem usada em aula mesmo
-            "photo": "https://www.zipmaster.com/wp-content/uploads/2022/04/Reusable-Cloth-Shopping-Bags-Rainbow-Pack-200-Case-Reusable-Bags-B26-061-3-1000x1000.jpg.webp"
+            "name": "Guitarra Gibson Les Paul",
+            "price": 1327.00,
+            "quantity": "3",
+            "categories": [],
+            "description": "Guitarra les paul da marca Gibson",
+            "photos": "https://www.zipmaster.com/wp-content/uploads/2022/04/Reusable-Cloth-Shopping-Bags-Rainbow-Pack-200-Case-Reusable-Bags-B26-061-3-1000x1000.jpg.webp",
+            "popular": null,
+            "visible": true,
+            "location": "SP, SP",
+            "additionalDetails": null,
+            "specialPrice": null
         })
         .returns('data._id') //Capturar o ID que retorna da API
-        console.log("ID da Nova Categoria: ", catId)
+    console.log("ID da Nova Categoria: ", catId)
 });
 
-it('API - Deve editar categorias', async () => {
+it('API - Deve editar um produto', async () => {
     await spec()
-        .put(`/api/editCategory/${catId}`)
+        .put(`/api/editProduct/${catId}`)
         .withJson({
             "authorization": token,
-            "name": "Guitarra 2",
-            //Imagem usada em aula mesmo
-            "photo": "Any"
+            "name": "Guitarra Gibson SG Angus Young Signature",
+            "price": 5500.00,
+            "quantity": "1",
+            "categories": [],
+            "description": "Guitarra SG Signature do Angus Young do AC/DC",
+            "photos": "https://www.zipmaster.com/wp-content/uploads/2022/04/Reusable-Cloth-Shopping-Bags-Rainbow-Pack-200-Case-Reusable-Bags-B26-061-3-1000x1000.jpg.webp",
+            "popular": null,
+            "visible": true,
+            "location": "SP, SP",
+            "additionalDetails": null,
+            "specialPrice": null
         })
 });
 
-it('API - Deve deletar categorias', async () => {
+it('API - Deve deletar um produto', async () => {
     await spec()
-        .delete(`/api/deleteCategory/${catId}`)
+        .delete(`/api/deleteProduct/66f47e114252422517014d51`)
         .withJson({
             "authorization": token,
         })
