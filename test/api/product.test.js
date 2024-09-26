@@ -15,7 +15,7 @@ beforeEach(async () => {
         .returns('data.token')
 })
 
-it('API - Deve Listar os produtos', async () => {
+it('API - Deve listar os produtos', async () => {
     await spec()
         .get('/public/getProducts')
         .expectStatus(200)
@@ -40,7 +40,7 @@ it('API - Deve Adicionar um produto e pegar o ID', async () => {
             "specialPrice": null
         })
         .returns('data._id') //Capturar o ID que retorna da API
-    console.log("ID da Nova Categoria: ", catId)
+    //console.log("ID da Nova Categoria: ", catId)
 });
 
 it('API - Deve editar um produto', async () => {

@@ -31,9 +31,9 @@ it('API - Deve listar as categorias', async () => {
         })
 });
 
-let catId;
-it('API - Deve Adicionar uma categorias e pegar o ID', async () => {
-    catId = await spec()
+let prodId;
+it('API - Deve adicionar uma categorias e pegar o ID', async () => {
+    prodId = await spec()
         .post('/api/addCategory')
         .withHeaders("Authorization", token)
         .withJson({
@@ -42,12 +42,12 @@ it('API - Deve Adicionar uma categorias e pegar o ID', async () => {
             "photo": "https://www.zipmaster.com/wp-content/uploads/2022/04/Reusable-Cloth-Shopping-Bags-Rainbow-Pack-200-Case-Reusable-Bags-B26-061-3-1000x1000.jpg.webp"
         })
         .returns('data._id') //Capturar o ID que retorna da API
-        console.log("ID da Nova Categoria: ", catId)
+        //console.log("ID do novo produto: ", prodId)
 });
 
 it('API - Deve editar a categoria', async () => {
     await spec()
-        .put(`/api/editCategory/${catId}`)
+        .put(`/api/editCategory/${prodId}`)
         .withJson({
             "authorization": token,
             "name": "Guitarra 2",
@@ -57,7 +57,7 @@ it('API - Deve editar a categoria', async () => {
 
 it('API - Deve deletar a categoria', async () => {
     await spec()
-        .delete(`/api/deleteCategory/${catId}`)
+        .delete(`/api/deleteCategory/${prodId}`)
         .withJson({
             "authorization": token,
         })
